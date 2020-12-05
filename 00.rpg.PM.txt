@@ -1,0 +1,103 @@
+module load gdal/gcc/2.2.0
+module load proj.4
+
+cd /home/vtinney/pop/
+
+# Clip WorldPop to Cities Extent
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2000_1km_Aggregated.tif clip_ppp_2000.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2001_1km_Aggregated.tif clip_ppp_2001.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2002_1km_Aggregated.tif clip_ppp_2002.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2003_1km_Aggregated.tif clip_ppp_2003.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2004_1km_Aggregated.tif clip_ppp_2004.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2005_1km_Aggregated.tif clip_ppp_2005.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2006_1km_Aggregated.tif clip_ppp_2006.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2007_1km_Aggregated.tif clip_ppp_2007.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2008_1km_Aggregated.tif clip_ppp_2008.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2009_1km_Aggregated.tif clip_ppp_2009.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2010_1km_Aggregated.tif clip_ppp_2010.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2011_1km_Aggregated.tif clip_ppp_2011.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2012_1km_Aggregated.tif clip_ppp_2012.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2013_1km_Aggregated.tif clip_ppp_2013.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2014_1km_Aggregated.tif clip_ppp_2014.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2015_1km_Aggregated.tif clip_ppp_2015.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2016_1km_Aggregated.tif clip_ppp_2016.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2017_1km_Aggregated.tif clip_ppp_2017.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2018_1km_Aggregated.tif clip_ppp_2018.tif
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2019_1km_Aggregated.tif clip_ppp_2019.tif
+
+
+# PM Hammer 2020
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200301_200312_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200401_200412_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200501_200512_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200601_200612_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200701_200712_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200801_200812_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200901_200912_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201001_201012_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201101_201112_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201201_201212_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201301_201312_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201401_201412_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201501_201512_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201601_201612_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201701_201712_0p01.nc
+wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201801_201812_0p01.nc
+
+
+# Convert NetCDF to tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_200001_200012_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_200001_200012_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_200001_200012_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_200001_200012_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_200101_200112_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_200101_200112_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_200201_200212_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_200201_200212_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_200301_200312_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_200301_200312_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_200401_200412_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_200401_200412_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_200501_200512_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_200501_200512_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_200601_200612_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_200601_200612_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_200701_200712_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_200701_200712_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_200801_200812_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_200801_200812_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_200901_200912_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_200901_200912_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_201001_201012_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_201001_201012_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_201101_201112_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_201101_201112_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_201201_201212_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_201201_201212_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_201301_201312_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_201301_201312_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_201401_201412_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_201401_201412_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_201501_201512_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_201501_201512_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_201601_201612_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_201601_201612_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_201701_201712_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_201701_201712_0p01.tif
+gdal_translate NETCDF:"ACAG_PM25_GWR_V4GL03_201801_201812_0p01.nc":PM25 ACAG_PM25_GWR_V4GL03_201801_201812_0p01.tif
+
+
+# Clip/warp to match cities
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_200001_200012_0p01.tif clip_pm_2000.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_200101_200112_0p01.tif clip_pm_2001.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_200201_200212_0p01.tif clip_pm_2002.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_200301_200312_0p01.tif clip_pm_2003.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_200401_200412_0p01.tif clip_pm_2004.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_200501_200512_0p01.tif clip_pm_2005.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_200601_200612_0p01.tif clip_pm_2006.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_200701_200712_0p01.tif clip_pm_2007.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_200801_200812_0p01.tif clip_pm_2008.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_200901_200912_0p01.tif clip_pm_2009.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_201001_201012_0p01.tif clip_pm_2010.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_201101_201112_0p01.tif clip_pm_2011.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_201201_201212_0p01.tif clip_pm_2012.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_201301_201312_0p01.tif clip_pm_2013.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_201401_201412_0p01.tif clip_pm_2014.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_201501_201512_0p01.tif clip_pm_2015.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_201601_201612_0p01.tif clip_pm_2016.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_201701_201712_0p01.tif clip_pm_2017.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -co compress=LZW -co TILED=YES -overwrite ACAG_PM25_GWR_V4GL03_201801_201812_0p01.tif clip_pm_2018.tif
+
+
+# PM GBD at 1km for creating sensitivity ratio
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2019.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2019.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2015.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2015.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2010.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2010.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2000.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2000.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_1990.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_1990.tif
