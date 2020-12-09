@@ -5,8 +5,6 @@ lu_hdc <- read.csv('hdc_gbd_lookup.csv')
 lu_hdc <- lu_hdc[,c(1,3,4,5,7,9:15)]
 colnames(lu_hdc)[2] <- 'id'
 
-setwd('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/exp_sum/')
-
 hdc <- read.csv('combined.hdc.expsum.csv')
 
 hdc <- hdc[,c(3,5:7)]

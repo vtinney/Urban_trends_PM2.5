@@ -23,14 +23,14 @@ print('conc')
 hap <- read.csv(paste('/GWSPH/groups/anenberggrp/GBD_2019_June_2020/exposure_summaries/hap_pm2.5_exposure_nat&subnat.csv',sep=''))
 hap.prop <- read.csv(paste('/GWSPH/groups/anenberggrp/GBD_2019_June_2020/exposure_summaries/hap_prop_exposure_nat&subnat.csv',sep=''))
 
-rates <- read.csv(paste('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/lookup/all.ihme.final.csv',sep=''))
+rates <- read.csv(paste('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/lookup/allages.ihme.final.csv',sep=''))
 
 ihme2 <- rates[,c(3,4,5,9,11,13,14,15)]
 
 df2 <- subset(ihme2, cause_name %in% c('Diabetes mellitus type 2','Lower respiratory infections',
                                     'Chronic obstructive pulmonary disease', 'Tracheal, bronchus, and lung cancer'))
 
-df3 <- subset(df2, age_name %in% 'Age-standardized')
+df3 <- subset(df2, age_name %in% 'All Ages')
 df4 <- subset(df3, measure_name %in% 'Deaths')
 
 causes <- c('Lower respiratory infections','Chronic obstructive pulmonary disease', 'Diabetes mellitus type 2',
@@ -97,7 +97,7 @@ causes <- c('Lower respiratory infections','Chronic obstructive pulmonary diseas
       
       # Sum concentrations OAP and HAP
       concs2$sum.pm <- concs2$popw + concs2$mean.hap     
-      
+      concs2$popw[concs2$popw < 0.01] <- NA
       concs2 <- concs2[complete.cases(concs2$popw), ]
       concs2 <- concs2[complete.cases(concs2$sum.pm), ]
       
