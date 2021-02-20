@@ -20,7 +20,13 @@ ages <- c("25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 
           "65 to 69","70 to 74","75 to 79","80 to 84","85 to 89","90 to 94","90 to 94")
 
 #Specify age group years for rates
-years <- c(2000:2018)
+#Specify age group years for rates
+years.conc <- c(2018,2000,2000,2000)
+years.bdr <- c(2000,2018,2000,2000)
+years.pop <- c(2000,2000,2018,2000)
+years.age <- c(2000,2000,2000,2018)
+years <- 1:4
+anal.names <- c('conc','bdr','pop','age')
 
 conc <- read.csv(paste('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/lookup/combined.hdc.exp.sum.lu.csv',sep=''))
 print('conc')
@@ -78,7 +84,12 @@ for (j in 1:length(cats)){
   for (k in 1:length(years)){
     
     for (i in 1:length(ages)){
-      years.x <- years[k]
+      
+      years.bdrx <- years.bdr[k]
+      years.concx <- years.conc[k]
+      years.popx <- years.pop[k]
+      years.agex <- years.age[k]
+
       # Read in the relative -----------------------------------------------------------------------------------------------------------------
       mrbrt <- read.csv(paste('/GWSPH/groups/anenberggrp/GBD_2019_June_2020/MRBRT/',cats[j],age.groups[i],'_rr.csv',sep=''))
       mrbrt <- mrbrt[,c(2,3)]
@@ -86,17 +97,29 @@ for (j in 1:length(cats)){
       print('mrbrt')
 
       # Subset the rates for year------------------------------------------------------------------------------------------------------------
-      df5 <- subset(ihme3, year %in% years.x)
+      df5 <- subset(ihme3, year %in% years.bdrx)
       df6 <- subset(df5, cause_name %in% causes[j])
       df7 <- df6 %>% distinct()
       df8 <- subset(df7, age_name %in% ages[i])
       
-      hap1 <- subset(hap, year_id %in% years.x)
+      dfz <- subset(ihme3, year %in% years.popx)
+      dfn <- subset(dfz, cause_name %in% causes[j])
+      dfx <- dfn %>% distinct()
+      df10 <- subset(dfx, age_name %in% ages[i])
+      
+      colnames(df8)[1] <- 'location_id'
+      colnames(df10)[1] <- 'location_id'
+      df8 <- merge(df8, df10, by='location_id')
+      
+      hap1 <- subset(hap, year_id %in% years.concx)
       hap1 <- subset(hap1, grouping %in% 'indoor')
       
       colnames(hap1)[5] <- 'mean.hap'
       
-      hap.prop1 <- subset(hap.prop, year_id %in% years.x)
+      hap.prop1 <- subset(hap.prop, year_id %in% years.concx)
+      hap.prop2 <- subset(hap.prop, year_id %in% years.agex)
+      
+      hap.prop3 <- merge(hap.prop1, hap.prop2, by='location_id')
 
       #---------------------------------------------------------------------------------------------------------------------------------------
       # Step 2
@@ -114,18 +137,23 @@ for (j in 1:length(cats)){
       # Step 3 - assign RR estiamtes to concentrations
 
       conc1 <- conc
-      conc1 <- subset(conc1, year %in% years.x)
+      conc1 <- subset(conc1, year %in% years.concx)
       conc1 <- conc1[,c(2:15)]
       colnames(conc1)[9] <- 'parent_id'
       colnames(conc1)[5] <- 'location_id'
       colnames(hap1)[1] <- 'parent_id'
-      colnames(hap.prop1)[1] <- 'parent_id'
+      colnames(hap.prop3)[1] <- 'parent_id'
       
       concs <- merge(conc1, hap1, by='parent_id',all=TRUE)
       
-      concs2 <- merge(concs, hap.prop1, by='parent_id',all=TRUE)
+      concs2 <- merge(concs, hap.prop3, by='parent_id',all=TRUE)
+      
+      conc3 <- conc
+      conc3 <- subset(conc3, year %in% years.popx)
+      conc3 <- conc3[,c(2,3)]
+      
+      concs2 <- merge(concs2, conc3, by='id')
       print('concs')
-      #colnames(concs2)[18] <- 'mean.hap'
       
       # Sum concentrations OAP and HAP
       concs2$sum.pm <- concs2$popw + concs2$mean.hap     
@@ -139,32 +167,35 @@ for (j in 1:length(cats)){
       concs2$WHO <- 10
       
       # Assign exposures based on OAP and OAP+HAP (pm.sum)
+      # Assign exposures based on OAP and OAP+HAP (pm.sum)
       for (x in 1:nrow(concs2)){
         if(concs2[x,4]>0){
-          concs2[x,33] <- mrbrt[,1][concs2[x,4] > mrbrt[,2] & concs2[x,4] < mrbrt[,3]]
-          concs2[x,34] <- mrbrt[,1][concs2[x,31] > mrbrt[,2] & concs2[x,31] < mrbrt[,3]]
+          concs2[x,42] <- mrbrt[,1][concs2[x,4] > mrbrt[,2] & concs2[x,4] < mrbrt[,3]]
+          concs2[x,43] <- mrbrt[,1][concs2[x,40] > mrbrt[,2] & concs2[x,40] < mrbrt[,3]]
         }else{
-          concs2[x,33] <- 0
-          concs2[x,34] <- 0
+          concs2[x,42] <- 0
+          concs2[x,43] <- 0
         }
       } 
       
       for (x in 1:nrow(concs2)){
         if(concs2[x,4] == 0){
-          concs2[x,35] <- 0
+          concs2[x,44] <- 0
         }
         if(concs2[x,4] < 10 & concs2[x,4] > 0){
-          concs2[x,35] <- mrbrt[,1][concs2[x,4] > mrbrt[,2] & concs2[x,4] < mrbrt[,3]]
+          concs2[x,44] <- mrbrt[,1][concs2[x,4] > mrbrt[,2] & concs2[x,4] < mrbrt[,3]]
         }else{
-          concs2[x,35] <- mrbrt[,1][mrbrt[,2] == 10.00]
+          concs2[x,44] <- mrbrt[,1][mrbrt[,2] == 10.00]
         }
       } 
       
-      colnames(concs2)[33] <- 'rr.oap'
-      colnames(concs2)[34] <- 'rr.hap'
-      colnames(concs2)[35] <- 'rr.who'
+      
+      colnames(concs2)[42] <- 'rr.oap'
+      colnames(concs2)[43] <- 'rr.hap'
+      colnames(concs2)[44] <- 'rr.who'
       
       colnames(df8)[1] <- 'parent_id'
+      concs2 <- concs2[,c(1:22,38:44)]
       df9 <- merge(concs2, df8, by='parent_id',all=TRUE)
       # RR incorporating HAP
       
@@ -185,17 +216,18 @@ for (j in 1:length(cats)){
       df9$rr.who <- df9$rr.who
       df9$paf.who <- (df9$rr.who-1)/df9$rr.who
       
-      df9$pop.frac <- df9$pop/df9$population
+      df9$pop.frac <- df9$pop.y/df9$population.y
       
       # Estimate PAF - both using HAP and not using HAP
-      df9$ac.hap <- df9$paf.pm.hap*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 # using HAP
-      df9$ac.nohap <- df9$paf.nohap*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 # not using HAP
-      df9$ac.who <- df9$paf.who*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 # not using HAP
+      df9$ac.hap <- df9$paf.pm.hap*(df9$pop.sum.y*df9$pop.frac)*df9$val.y*10^-5 # using HAP
+      df9$ac.nohap <- df9$paf.nohap*(df9$pop.sum.y*df9$pop.frac)*df9$val.y*10^-5 # not using HAP
+      df9$ac.who <- df9$paf.who*(df9$pop.sum.y*df9$pop.frac)*df9$val.y*10^-5 # not using HAP
       
-      fout_2 <- paste('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/results/city_level/cvd/',causes[j],years[k],age.groups[i],'.csv',sep='')
+      df9$anal.names <- paste(anal.names[k])
+      
+      fout_2 <- paste('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/results/city_level/dem/cvd/',cats[j],years[k],age.groups[i],'.csv',sep='')
       
       write.csv(df9, fout_2)
-      
       
     }    
   }
@@ -205,10 +237,10 @@ for (j in 1:length(cats)){
 # End
 # ==========================================================================================================================================
 # Combine all results for all years into one dataframe
-setwd('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/results/city_level/cvd/')
+setwd('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/results/city_level/dem/cvd/')
 
-filenames <- list.files(path='/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/results/city_level/cvd/',pattern="*.csv", full.names=TRUE)
+filenames <- list.files(path='/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/results/city_level/dem/cvd/',pattern="*.csv", full.names=TRUE)
 dataset <- do.call("rbind",lapply(filenames,FUN=function(files){read.csv(files, header=TRUE, sep=",")}))
-write.csv(dataset, "combined.city.paf.cvd.stroke.csv")
+write.csv(dataset, "combined.city.paf.cvd.stroke.dem.csv")
 
 

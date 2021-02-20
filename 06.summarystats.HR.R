@@ -3,8 +3,9 @@ library(tidyverse)
 setwd('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/lookup/')
 
 popw <- read.csv('combined.hdc.exp.sum.lu.csv')
-
+#==============================================================================
 # Total population in cities by year
+#==============================================================================
 all.popw <- popw %>%
   group_by(year) %>%
   summarize(pop.sum = sum(pop.sum,na.rm=T))
@@ -20,8 +21,9 @@ all <- read.csv('allcauses.city.results.csv')
 all$acrate.nohap <- (all$ac.nohap*100000)/all$pop.sum
 all$acrate.who <- (all$ac.who*100000)/all$pop.sum
 
-
+#==============================================================================
 # Global mean and SD popw PM
+#==============================================================================
 avg.pm <- all %>% 
   group_by(year) %>%
   summarize(popw = mean(popw, na.rm = T),
@@ -30,7 +32,9 @@ avg.pm <- all %>%
             max = max(popw, na.rm=T))
 avg.pm <- as.data.frame(avg.pm)
 write.csv(avg.pm, 'avg.pm.csv')
+#==============================================================================
 # Avg PM by region and year
+#==============================================================================
 avg.pm.region <- all %>% 
   group_by(WHORegion,year) %>%
   summarize(popw = mean(popw, na.rm = T),
@@ -40,7 +44,9 @@ avg.pm.region <- all %>%
 avg.pm.region <- as.data.frame(avg.pm.region)
 write.csv(avg.pm.region, 'avg.pm.region.csv')
 
+#==============================================================================
 # Mean popw per year and region plus percent change
+#==============================================================================
 avg.pm.region <- all %>% 
   group_by(WHORegion,year) %>%
   summarize(popw = mean(popw, na.rm = T))
@@ -50,32 +56,41 @@ avg.pm.region.long <- avg.pm.region.spread %>% spread(year, popw)
 avg.pm.region.long$pc <- (avg.pm.region.long$`2018`-avg.pm.region.long$`2000`)/avg.pm.region.long$`2000`*100
 write.csv(avg.pm.region.long, 'avg.pm.region.long.csv')
 
+#==============================================================================
 # Unique number of cities meeting the WHO recommendation
-all.who <- subset(all, popw < 10)
+#==============================================================================
+all.who <- subset(df, popw < 10)
 x <- unique(all.who$city)
 
 # #=====================================================================================
 # Mean attributable mortality rate by year and region
+#==============================================================================
 avg.acrate.region <- all %>% 
   group_by(WHORegion,year) %>%
   summarize(acrate = mean(acrate.nohap, na.rm = T))
 
-
+#==============================================================================
 # Percent change in attributable mortality rate per region
+#==============================================================================
 avg.acrate.region.spread <- as.data.frame(avg.acrate.region)
 avg.acrate.region.long <- avg.acrate.region.spread %>% spread(year, acrate)
 avg.acrate.region.long$pc <- (avg.acrate.region.long$`2018`-avg.acrate.region.long$`2000`)/avg.acrate.region.long$`2000`*100
 
 write.csv(avg.acrate.region.long, 'avg.acrate.region.long.csv')
 
-all.spread <- all[,c(1,2,5,6,12)]
-all.spread <- all.spread %>% spread(year, popw)
+#==============================================================================
+# all changes mortality (inc/dec)
+#==============================================================================
+all.spread <- df[,c(2,3,15)]
+all.spread <- all.spread %>% spread(year, ac.nohap)
 all.spread$pc <- (all.spread$`2018`-all.spread$`2000`)/all.spread$`2000`*100
 
 all.dec <- subset(all.spread, pc < 0)
 all.inc <- subset(all.spread, pc >=0)
   
+#==============================================================================
 # Total global cases by year
+#==============================================================================
 all.total <- all %>%
   group_by(year) %>%
   summarize(cases=sum(ac.nohap,na.rm=T),
@@ -83,7 +98,9 @@ all.total <- all %>%
 all.total <- as.data.frame(all.total)
 write.csv(all.total, 'all.total.csv')
 
+#==============================================================================
 # Regional attributbale mortality rate means
+#==============================================================================
 all.rate <- all[,c(2,3,6,12,16)]
 all.rate$acrate.nohap <- as.numeric(all.rate$acrate.nohap)
 
@@ -100,8 +117,9 @@ all.rate.gbl <- all %>%
   summarize(rate2 = mean(acrate.nohap,na.rm=T))
 all.rate.gbl <- as.data.frame(all.rate.gbl)
 write.csv(all.rate.gbl, 'all.rate.gbl.csv')
-#==============================================================
-# Concentration variation among all cities
+#==============================================================================
+# Concentration variation among all 
+#==============================================================================
 mm.rate <- all %>%
   group_by(year) %>%
   summarize(min = min(acrate.nohap, na.rm=T),
@@ -109,14 +127,30 @@ mm.rate <- all %>%
 mm.rate <- as.data.frame(mm.rate)
 write.csv(mm.rate, 'mm.rate.csv')
 
-#==============================================================
+#==============================================================================
 #Long percent change each city for PM and rates
-setwd('E:/GBD_2020/Final/results/')
+#==============================================================================
+setwd('F:/GBD_2020/Final/results/')
 df <- read.csv('allcauses.city.results.csv')
 
 df$acrate.nohap <- (df$ac.nohap*100000)/df$pop.sum
 df$acrate.who <- (df$ac.who*100000)/df$pop.sum
 
+dfc <- df[,c(2,3,6,12,17)]
+dfc <- dfc %>% spread(year,acrate.nohap)
+dfc$pc <- round((dfc$`2018`-dfc$`2000`)/dfc$`2000`*100,0)
+write.csv(dfc, 'all.city.acrate.long.csv')
+#==============================================================================
+# All cases per region
+#==============================================================================
+case <- df %>%
+  group_by(WHORegion,year) %>%
+  summarize(ac.nohap = sum(ac.nohap, na.rm=T))
+case <- as.data.frame(case)
+case <- case %>% spread(year,ac.nohap)
+case$pc <- round((case$`2018`-case$`2000`)/case$`2000`*100,0)
+
+write.csv(case, 'cases.pc.region.csv')
 #==============================================================================
 # TPM all cities
 #==============================================================================

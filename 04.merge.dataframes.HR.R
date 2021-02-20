@@ -3,7 +3,7 @@ library(tidyverse)
 setwd('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/results/city_level/df/')
 #=================================================================================================
 df <- read.csv("combined.city.paf.cvd.stroke.csv")
-df3 <- df[,c(3:16,39,40,53,54)]
+df3 <- df[,c(3:16,39,42,53,54)]
 
 
 # [1] "X.1"             "X"               "parent_id"       "id"
@@ -85,3 +85,17 @@ all.years <- all.nohap %>%
 all.years <- as.data.frame(all.years)
 
 write.csv(all.nohap, 'allcauses.city.results.csv')
+
+
+all.cvd <- df3 %>% 
+  group_by(year,WHORegion) %>%
+  summarize(ac.nohap = sum(ac.nohap, na.rm = T))
+all.cvd <- as.data.frame(all.cvd)
+write.csv(all.cvd, 'all.cvd.region.csv')
+
+
+all.comb <- df2 %>% 
+  group_by(year,WHORegion) %>%
+  summarize(ac.nohap = sum(ac.nohap, na.rm = T))
+all.comb <- as.data.frame(all.comb)
+write.csv(all.comb, 'all.comb.region.csv')

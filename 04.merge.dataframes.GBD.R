@@ -24,7 +24,7 @@ df3 <- df[,c(3:16,39,40,53,54)]
 
 
 df2 <- read.csv('combined.city.paf.gbd.csv')
-df2 <- df2[,c(3:16,40,41,50,51)]
+df2 <- df2[,c(3:16,38,41,50,51)]
 
 # #
 # [1] "X.1"             "X"               "parent_id"       "id"

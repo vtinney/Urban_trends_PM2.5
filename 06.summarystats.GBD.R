@@ -9,7 +9,8 @@ all$ac.nohap <- as.numeric(all$ac.nohap)
 all$acrate.nohap <- (all$ac.nohap*100000)/all$pop.sum
 all$acrate.who <- (all$ac.who*100000)/all$pop.sum
 
-
+colnames(all)[4] <- 'popw'
+colnames(all)[5] <- 'pop.sum'
 # Global mean and SD popw PM
 avg.pm <- all %>% 
   group_by(year) %>%
