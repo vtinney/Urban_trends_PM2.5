@@ -1,34 +1,34 @@
 #================================================================================
-# library(dplyr)
-# library(ggplot2)
-# library(ggspatial)
+library(dplyr)
+library(ggplot2)
+library(ggspatial)
 library(tidyverse)
-# library(cowplot)
-# library(tidyverse)
-# library(ggtext)
-# library(ggpubr)
-# library(raster)
-# library(rgdal)
-# library(ggrepel)
-# library(ggspatial)
-# library(sf)
-# library(mapproj)
-# library(maps)
-# library(rgeos)
-# library(maptools)
-# library(gpclib)
-# library(Cairo)
-# library(showtext)
-# library(sysfonts)
-# font_add_google("Alegreya Sans", "Alegreya Sans SC Light")
-# options("device" = "RStudioGD")
-# options("device" = "windows")
-# showtext_auto()
+library(cowplot)
+library(tidyverse)
+library(ggtext)
+library(ggpubr)
+library(raster)
+library(rgdal)
+library(ggrepel)
+library(ggspatial)
+library(sf)
+library(mapproj)
+library(maps)
+library(rgeos)
+library(maptools)
+library(gpclib)
+library(Cairo)
+library(showtext)
+library(sysfonts)
+font_add_google("Alegreya Sans", "Alegreya Sans SC Light")
+options("device" = "RStudioGD")
+options("device" = "windows")
+showtext_auto()
 
 #=================================================================================
 # barchart
 #=================================================================================
-setwd('F:/GBD_2020/Final/results/')
+setwd('D:/GBD_2020/Final/results/')
 
 
 df <- read.csv('allcauses.city.results.csv')
@@ -82,10 +82,10 @@ pal <- c("Net change"="grey80",
          "Population ageing"="#E73F74",
          "Population growth"="#11A579")
 
-dfa$diff.bdr <- round(dfa$bdr/dfa$`2000`-1,4)
-dfa$diff.conc <- round(dfa$conc/dfa$`2000`-1,4)
-dfa$diff.pop <- round(dfa$pop/dfa$`2000`-1,4)
-dfa$diff.age <- round(dfa$age/dfa$`2000`-1,4)
+dfa$diff.bdr <- round(log(dfa$bdr/dfa$`2000`)-1,4)
+dfa$diff.conc <- round(log(dfa$conc/dfa$`2000`)-1,4)
+dfa$diff.pop <- round(log(dfa$pop/dfa$`2000`)-1,4)
+dfa$diff.age <- round(log(dfa$age/dfa$`2000`)-1,4)
 dfa$param <- (dfa$diff.bdr*dfa$diff.conc*dfa$diff.pop)-1
 dfa$diff.net <- round((dfa$`2018`-dfa$`2000`)/dfa$`2000`,4)
 
@@ -97,20 +97,13 @@ dfa$diff.conc2 <- dfa$diff.conc*dfa$ratio2*100
 dfa$diff.age2 <- dfa$diff.age*dfa$ratio2*100
 dfa$diff.net <- dfa$diff.net*100
 
-dfa2 <- dfa[,c(1,13,16:18)]
-write.csv(dfa2, 'parameter.contribution.region.csv')
-
-# Version 1
-dfa3 <- dfa2 %>% gather(Parameter, Contribution,"diff.net":"diff.conc2")
-dfa3$"Parameter"[dfa3$"Parameter" == 'diff.net'] <- 'Net change'
-dfa3$"Parameter"[dfa3$"Parameter" == 'diff.pop2'] <- 'Population growth'
-#dfa3$"Parameter"[dfa3$"Parameter" == 'diff.age2'] <- 'Population ageing'
-dfa3$"Parameter"[dfa3$"Parameter" == 'diff.conc2'] <- 'Concentrations'
-dfa3$"Parameter"[dfa3$"Parameter" == 'diff.bdf2'] <- 'Baseline disease rates'
+dfa2 <- dfa[,c(1,15,18:21)]
+write.csv(dfa, 'parameter.contribution.region.csv')
 
 # Version 2
 dfa2 <- read.csv('netchange_barchart_input.csv')
-dfa3 <- dfa2 %>% gather(Parameter, Contribution,"Population.Ageing":"Net.Change")
+#dfa2[,c(2:6)] <- dfa2[,c(2:6)]*100
+dfa3 <- dfa2 %>% gather(Parameter, Contribution,"Population.Growth":"Net.Change")
 dfa3$"Parameter"[dfa3$"Parameter" == 'Net.Change'] <- 'Net change'
 dfa3$"Parameter"[dfa3$"Parameter" == 'Population.Growth'] <- 'Population growth'
 dfa3$"Parameter"[dfa3$"Parameter" == 'Population.Ageing'] <- 'Population ageing'
@@ -127,7 +120,7 @@ dfa3$"WHORegion"[dfa3$"WHORegion" == 'Western Pacific'] <- 'Western\nPacific'
 dfa3$"WHORegion"[dfa3$"WHORegion" == 'South-East Asia'] <- 'South-East\nAsia'
 dfa3$"WHORegion"[dfa3$"WHORegion" == 'Eastern Mediterranean'] <- 'Eastern\nMediterranean'
 
-dfa3$Contribution <- dfa3$Contribution*100
+#dfa3$Contribution <- dfa3$Contribution*100
 
 dfa4 <- dfa3 %>%
   arrange(Contribution,WHORegion) %>%
@@ -139,10 +132,10 @@ dfa4 <- dfa3 %>%
 
 bar <- ggplot() +
   geom_bar(data=dfa4, aes(x=Group,y=Contribution,fill=Parameter),
-           position="stack", stat="identity", color="white",size=0.1,width=0.5)+
+           position="stack", stat="identity", color="white",size=0.1)+#,width=0.5)+
   facet_wrap(.~WHORegion,strip.position = "bottom",nrow=1)+
   labs(x='WHO Region',
-       y=bquote(~PM[2.5]~'attributable mortality percent change (%)'))+
+       y=bquote('Percent difference between 2001 and 2017 [(2017-2001)/2001]'))+
   scale_y_continuous(breaks=c(-100,-75,-50,-25,0,25,50,75,100))+
   geom_hline(yintercept=0, color = 'grey50', size=0.5,linetype='dotted')+
   scale_fill_manual(values = pal)+

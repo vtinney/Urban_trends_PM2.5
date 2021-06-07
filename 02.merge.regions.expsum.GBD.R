@@ -1,5 +1,5 @@
 library(tidyverse)
-setwd('E:/GBD_2020/Final/exp_sum/')
+setwd('D:/GBD_2020/Final/exp_sum/')
 list.files()
 
 lu_hdc <- read.csv('hdc_gbd_lookup.csv')

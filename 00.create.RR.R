@@ -5,16 +5,70 @@
 # Author: V Southerland
 # Note - each iteration takes approximately 4 hrs. Did not incorporate into a loop and each age/outcome
 # was run separately. 
-
+# Updated: 5-17-2021 to add percentiles
 #=========================================================================================================
 
 library(tidyverse)
 setwd('C:/Users/vat05/Dropbox/GBD 2019/MRBRT/June_2020_mrbrt/mrbrt/')
 
+#setwd('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/mrbrt/')
+
 # Set uniform distribution draws, 1000 estimates between 2.4 and 5.9
 draws <- runif(1000, min = 2.4, max = 5.9)
 
-n <- read.csv("cvd_stroke_55.csv")
+n <- read.csv("t2_dm.csv")
+
+# # Create lower and upper bounds for each exposure integer
+# for (t in 1:nrow(n)){
+#   n$upper2[t] <- n$exposure_spline[t+1]
+# }
+# 
+# ls <- list() # store results in a list
+# 
+# for (j in 2:nrow(n)){
+#   mat <- matrix(ncol = 1000,nrow = 1000) # Create 1000x1000 matrix
+#       for (k in 3:1001){
+#         for (i in 1:length(draws)){ 
+#       exp <- n[j,1]
+#       
+#       tmrel <- draws[i] # Draw from 1000 distribution of TMREL and set equal to draws
+#       
+#       if(exp > tmrel){
+#         mrbrt.tmrel <- n[,k][tmrel > n[,1] & tmrel < n[,1006]] # If the exposure level is greater than the tmrel, then divide the MRBRT of the exp integer by the MRBRT of the tmrel
+#         mrbrt <- n[j,k]
+#         
+#         rr <- mrbrt/mrbrt.tmrel
+#         
+#       }else{ # otherwise set the RR to 1.
+#         rr <- 1
+#         }
+#       
+#       mat[k-2,i] <- rr
+#     }
+#   }
+#   ls[[j-1]] <- mat
+#   print(j)
+# }
+# 
+# # Create a running average of the 1000x1000 matrix
+# mat2 <- matrix(ncol = 2,nrow = 385)
+# for (z in 1:length(ls)){
+#   mat2[z,1] <- mean(ls[[z]],na.rm=TRUE)
+#   mat2[z,2] <- n[z+1,1]
+# }
+# 
+# 
+# write.csv(mat2, 'cvd_stroke_55_rr.csv')
+
+#=========================================================================================================
+
+# library(tidyverse)
+# setwd('C:/Users/vat05/Dropbox/GBD 2019/MRBRT/June_2020_mrbrt/mrbrt/')
+# 
+# # Set uniform distribution draws, 1000 estimates between 2.4 and 5.9
+# draws <- runif(1000, min = 2.4, max = 5.9)
+# 
+# n <- read.csv("neo_lung.csv")
 
 # Create lower and upper bounds for each exposure integer
 for (t in 1:nrow(n)){
@@ -25,8 +79,8 @@ ls <- list() # store results in a list
 
 for (j in 2:nrow(n)){
   mat <- matrix(ncol = 1000,nrow = 1000) # Create 1000x1000 matrix
-      for (k in 3:1001){
-        for (i in 1:length(draws)){ 
+  for (k in 3:1001){
+    for (i in 1:length(draws)){ 
       exp <- n[j,1]
       
       tmrel <- draws[i] # Draw from 1000 distribution of TMREL and set equal to draws
@@ -39,7 +93,7 @@ for (j in 2:nrow(n)){
         
       }else{ # otherwise set the RR to 1.
         rr <- 1
-        }
+      }
       
       mat[k-2,i] <- rr
     }
@@ -49,12 +103,14 @@ for (j in 2:nrow(n)){
 }
 
 # Create a running average of the 1000x1000 matrix
-mat2 <- matrix(ncol = 2,nrow = 385)
+mat2 <- matrix(ncol = 4,nrow = 385)
 for (z in 1:length(ls)){
   mat2[z,1] <- mean(ls[[z]],na.rm=TRUE)
-  mat2[z,2] <- n[z+1,1]
+  mat2[z,2] <- as.vector(quantile(ls[[z]],probs=0.975,na.rm=TRUE))
+  mat2[z,3] <- as.vector(quantile(ls[[z]],probs=0.025,na.rm=TRUE))
+  mat2[z,4] <- n[z+1,1]
 }
 
 
-write.csv(mat2, 'cvd_stroke_55_rr.csv')
+write.csv(mat2, 't2_dm_rr2.csv')
 

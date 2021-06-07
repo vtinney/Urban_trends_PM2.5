@@ -71,20 +71,20 @@ x <- unique(gbd$year)
 all <- subset(all, year %in% x)
 
 all <- all[,c(2,3,4,5,6,12,15)]
-gbd <- gbd[,c(2,3,4,5,6,12,14)]
+gbd <- gbd[,c(2,3,4,5,6,12,13)]
 
 all$anal <- 'all'
 gbd$anal <- 'gbd'
 
-comp <- merge(all,gbd,by=c('year','id','WHORegion','city'))
+comp <- merge(all,gbd,by=c('year','id','WHORegion'))
 
 comp2 <- comp %>%
   dplyr::group_by(WHORegion,year) %>%
   dplyr::summarize(pop.sum.hr=sum(pop.sum.x ,na.rm=T),
                    popw.hr=mean(popw.x,na.rm=T),
                    ac.nohap.hr=sum(ac.nohap.x,na.rm=T),
-                   pop.sum.gbd=sum(popw.y,na.rm=T),
-                   popw.gbd=mean(pop.sum.y,na.rm=T),
+                   pop.sum.gbd=sum(pop.sum.y,na.rm=T),
+                   popw.gbd=mean(popw.y,na.rm=T),
                    ac.nohap.gbd=sum( ac.nohap.y ,na.rm=T))
 
 comp2 <- as.data.frame(comp2)

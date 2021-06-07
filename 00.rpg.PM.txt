@@ -48,12 +48,17 @@ cd /GWSPH/groups/anenberggrp/hammer_2020/
 # Clip/warp to match cities
 
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2002.tif clip_pm_2002.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2004.tif clip_pm_2004.tif
 
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2000.tif clip_pm_2000.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2001.tif clip_pm_2001.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2003.tif clip_pm_2003.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2005.tif clip_pm_2005.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2006.tif clip_pm_2006.tif
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2007.tif clip_pm_2007.tif
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2008.tif clip_pm_2008.tif
@@ -73,10 +78,30 @@ gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=l
 
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2019.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2019.tif
 
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2018.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2018.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2017.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2017.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2016.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2016.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2015.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2015.tif
+
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2014.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2014.tif
+
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2013.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2013.tif
+
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2012.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2012.tif
+
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2011.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2011.tif
+
 
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2010.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2010.tif
 
-gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2000.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2000.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2005.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2005.tif
 
-gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_1990.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_1990.tif
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2000.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2000.tif
