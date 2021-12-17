@@ -27,7 +27,7 @@ hammer warp.txt
 02.merge.regions.expsum.GBD.R           
 02.merge.regions.expsum.HR.R         
 
-# HIA code
+## HIA code
 03.combined.allages.HIA.countries.R     
 03.combined.allages.HIA.D.R             
 03.combined.allages.HIA.GBD.2.R         
@@ -41,20 +41,20 @@ hammer warp.txt
 03.cvd.stroke.rb.HIA.GBD.2.R        
 03.cvd.stroke.rb.HIA.GBD.R  
 
-# Merge results
+## Merge results
 04.merge.dataframes.D.R               
 04.merge.dataframes.GBD.R               
 04.merge.dataframes.HR.R              
 04.merge.dataframes.HR.uncertainty.R
 04.merge.HIA.countries.R   
 
-# Post-processing
+## Post-processing
 06.preparesupplemental.R                
 06.summarystats.GBD.R                   
 06.summarystats.HR.R                    
 06.summarystats.HR.uncertainty.R  
 
-# Sensitivity analyses
+## Sensitivity analyses
 07.compare.HR.GBD.2.R               
 07.compare.HR.GBD.R                    
 07.parameter.contribution.R             
