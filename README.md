@@ -1,26 +1,27 @@
 # Global urban temporal trends in fine particulate matter and attributable health burdens.
 
+Contact for this repository: Veronica Southerland, vtinney@gwu.edu
 
 ## Preprocessing files
-00.agefractions.R                       
-00.create.RR.batch.cvd.1.R              
-00.create.RR.batch.cvd.2.R              
-00.create.RR.batch.cvd.3.R              
-00.create.RR.batch1.R                   
-00.create.RR.batch2.R                   
-00.create.RR.batch3.R                   
-00.create.RR.R                          
-00.format.urban.extents.R               
-00.geocode.R                            
-00.rpg.PM.txt                           
-00.rpg.sensitivity.analysis.txt 
-hammer warp.txt  
+* 00.agefractions.R                       
+* 00.create.RR.batch.cvd.1.R              
+* 00.create.RR.batch.cvd.2.R              
+* 00.create.RR.batch.cvd.3.R              
+* 00.create.RR.batch1.R                   
+* 00.create.RR.batch2.R                   
+* 00.create.RR.batch3.R                   
+* 00.create.RR.R                          
+* 00.format.urban.extents.R               
+* 00.geocode.R                            
+* 00.rpg.PM.txt                           
+* 00.rpg.sensitivity.analysis.txt 
+* hammer warp.txt  
         
 ## Population-weighted city-level concentrations
-01.popw.expsum.GBD.2.R                 
-01.popw.expsum.GBD.3.R                
-01.popw.expsum.GBD.R                    
-01.popw.expsum.HR.R    
+* 01.popw.expsum.GBD.2.R                 
+* 01.popw.expsum.GBD.3.R                
+* 01.popw.expsum.GBD.R                    
+* 01.popw.expsum.HR.R    
 
 ## Merge concentrations with baseline disease rates and GBD data
 02.merge.regions.expsum.GBD.2.R         
