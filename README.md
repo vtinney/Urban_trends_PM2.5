@@ -30,7 +30,7 @@ Contact for this repository: Veronica Southerland, vtinney@gwu.edu
 * 01.popw.expsum.HR.R - create city-level population-weighted concentrations for main analysis at 1km   
 
 ## Merge concentrations with baseline disease rates and GBD data
-* 02.merge.regions.expsum.GBD.2.R         
+* 02.merge.regions.expsum.GBD.2.R - merge concentrations with baseline disease rates and GBD data for GBD analysis disaggregated to 1km      
 * 02.merge.regions.expsum.GBD.R - merge concentrations with baseline disease rates and GBD data for GBD analysis at 10km           
 * 02.merge.regions.expsum.HR.R - merge concentrations with baseline disease rates and GBD data for main analysis at 1km    
 
