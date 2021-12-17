@@ -24,8 +24,8 @@ Contact for this repository: Veronica Southerland, vtinney@gwu.edu
 * hammer warp.txt - updated Hammer reprojection 
         
 ## Population-weighted city-level concentrations
-* 01.popw.expsum.GBD.2.R - create city-level population-weighted concentrations for GBD inputs at 10km              
-* 01.popw.expsum.GBD.3.R - create city-level population-weighted concentrations for GBD inputs at 10km              
+* 01.popw.expsum.GBD.2.R - create city-level population-weighted concentrations using GBD concentrations disaggregated to 1km using Worldpop
+* 01.popw.expsum.GBD.3.R - create city-level population-weighted concentrations GBD at 10km and aggregated Hammer concentrations from 1km to 10km both using original GBD Pop concentrations           
 * 01.popw.expsum.GBD.R - create city-level population-weighted concentrations for GBD inputs at 10km                 
 * 01.popw.expsum.HR.R - create city-level population-weighted concentrations for main analysis at 1km   
 
@@ -36,14 +36,14 @@ Contact for this repository: Veronica Southerland, vtinney@gwu.edu
 
 ## HIA code     
 * 03.combined.allages.HIA.D.R - parameter contribution analysis for the main analysis at 1km         
-* 03.combined.allages.HIA.GBD.2.R - analysis using 10km GBD inputs for all other cause specific mortality      
+* 03.combined.allages.HIA.GBD.2.R - analysis using 10km GBD disaggregated to 1km inputs for all other cause specific mortality
 * 03.combined.allages.HIA.GBD.R - analysis using 10km GBD inputs for all other cause specific mortality        
 * 03.combined.allages.HIA.HR.R - main analysis for all other cause specific mortality endpoints         
 * 03.combined.allages.HIA.HR.uncertainty.R  main analysis for all other cause specific mortality endpoints + uncertainty estimates       
 * 03.cvd.stroke.HIA.D.R - parameter contribution analysis for the main analysis at 1km for CVD and stroke endpoints               
 * 03.cvd.stroke.HIA.HR.R - main analysis for CVD and stroke specific mortality endpoints at 1km                
 * 03.cvd.stroke.HIA.HR.uncertainty.R main analysis for CVD and stroke specific mortality endpoints at 1km + uncertainty   
-* 03.cvd.stroke.rb.HIA.GBD.2.R - analysis using 10km GBD inputs for CVD and stroke  
+* 03.cvd.stroke.rb.HIA.GBD.2.R - analysis using 10km GBD disaggregated to 1km inputs for CVD and stroke  
 * 03.cvd.stroke.rb.HIA.GBD.R - analysis using 10km GBD inputs for CVD and stroke
 
 ## Merge results
@@ -59,7 +59,7 @@ Contact for this repository: Veronica Southerland, vtinney@gwu.edu
 * 06.summarystats.HR.uncertainty.R - summary statistics for main results using 1km input files + uncertainty estimates
 
 ## Sensitivity analyses
-* 07.compare.HR.GBD.2.R - compare main analysis and GBD results            
+* 07.compare.HR.GBD.2.R - compare main analysis and 10km GBD disaggregated to 1km            
 * 07.compare.HR.GBD.R - compare main analysis and GBD results            
 * 07.parameter.contribution.R - calculates parameter contributions to the HIA          
 * 08.comparison.SA.R - compares sensitivity analysis results                  
