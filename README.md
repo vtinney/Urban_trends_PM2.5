@@ -5,7 +5,7 @@ Contact for this repository: Veronica Southerland, vtinney@gwu.edu
 ## Preprocessing files
 * 00.agefractions.R - create age fractions through back calculation of GBD data + formatting baseline disease rates                    
 
-### The RR estimate creation often breaks the code due to lack of HPC memory so here they are parsed out into 3 separate codes
+#### The RR estimate creation often breaks the code due to lack of HPC memory so here they are parsed out into 3 separate codes
 
 #### CVD RR estimates created from MRBRT GBD estimates
 * 00.create.RR.batch.cvd.1.R              
