@@ -21,10 +21,10 @@ ages <- c("25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 
 
 #Specify age group years for rates
 #Specify age group years for rates
-years.conc <- c(2018,2000,2000,2000)
-years.bdr <- c(2000,2018,2000,2000)
-years.pop <- c(2000,2000,2018,2000)
-years.age <- c(2000,2000,2000,2018)
+years.conc <- c(2019,2000,2000,2000)
+years.bdr <- c(2000,2019,2000,2000)
+years.pop <- c(2000,2000,2019,2000)
+years.age <- c(2000,2000,2000,2019)
 years <- 1:4
 anal.names <- c('conc','bdr','pop','age')
 
@@ -39,7 +39,7 @@ hap.prop <- read.csv(paste('/GWSPH/groups/anenberggrp/GBD_2019_June_2020/exposur
 
 ages1 <- read.csv(paste('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/lookup/age.fractions.csv',sep=''))
 
-ages2 <- ages1 %>% gather(year,pop,"pop.2000":"pop.2018")
+ages2 <- ages1 %>% gather(year,pop,"pop.2000":"pop.2019")
 
 ages2$year[ages2$year == 'pop.2000'] <- 2000
 ages2$year[ages2$year == 'pop.2001'] <- 2001
@@ -60,8 +60,9 @@ ages2$year[ages2$year == 'pop.2015'] <- 2015
 ages2$year[ages2$year == 'pop.2016'] <- 2016
 ages2$year[ages2$year == 'pop.2017'] <- 2017
 ages2$year[ages2$year == 'pop.2018'] <- 2018
+ages2$year[ages2$year == 'pop.2019'] <- 2019
 
-ages2 <- ages2[,c(2,3,5,6)]
+ages2 <- ages2[,c(2,3,6,7)]
 
 ihme2 <- rates[,c(3,4,5,9,11,13,14,15)]
 

@@ -13,7 +13,7 @@ library(safejoin)
 library(tidyverse)
 
 #Specify age group years for rates
-years <- c(2000:2018)
+years <- c(2000:2019)
 
 cats <- c('lri_rr','resp_copd_rr','t2_dm_rr','neo_lung_rr')
 
@@ -30,7 +30,7 @@ ihme2 <- rates[,c(3,4,5,9,11,13,14,15)]
 df2 <- subset(ihme2, cause_name %in% c('Diabetes mellitus type 2','Lower respiratory infections',
                                     'Chronic obstructive pulmonary disease', 'Tracheal, bronchus, and lung cancer'))
 
-df3 <- subset(df2, age_name %in% 'All Ages')
+df3 <- subset(df2, age_name %in% 'Age-standardized')
 df4 <- subset(df3, measure_name %in% 'Deaths')
 
 causes <- c('Lower respiratory infections','Chronic obstructive pulmonary disease', 'Diabetes mellitus type 2',

@@ -70,7 +70,7 @@ gbd <- read.csv('allcauses.city.results.GBD.csv')
 x <- unique(gbd$year)
 all <- subset(all, year %in% x)
 
-all <- all[,c(2,3,4,5,6,12,15)]
+all <- all[,c(2,3,4,5,6,13,18)]
 gbd <- gbd[,c(2,3,4,5,6,12,13)]
 
 all$anal <- 'all'
@@ -78,18 +78,24 @@ gbd$anal <- 'gbd'
 
 comp <- merge(all,gbd,by=c('year','id','WHORegion'))
 
+comp$popxconc.hr <- comp$pop.sum.x*comp$popw.x
+comp$popxconc.gbd <- comp$pop.sum.y*comp$popw.y
+
 comp2 <- comp %>%
   dplyr::group_by(WHORegion,year) %>%
   dplyr::summarize(pop.sum.hr=sum(pop.sum.x ,na.rm=T),
-                   popw.hr=mean(popw.x,na.rm=T),
-                   ac.nohap.hr=sum(ac.nohap.x,na.rm=T),
+                   popxconc.hr=sum(popxconc.hr,na.rm=T),
+                   ac.nohap.hr=sum(ac.point,na.rm=T),
                    pop.sum.gbd=sum(pop.sum.y,na.rm=T),
-                   popw.gbd=mean(popw.y,na.rm=T),
-                   ac.nohap.gbd=sum( ac.nohap.y ,na.rm=T))
+                   popxconc.gbd=sum(popxconc.gbd,na.rm=T),
+                   ac.nohap.gbd=sum( ac.nohap ,na.rm=T))
 
 comp2 <- as.data.frame(comp2)
 
 comp2$rate.hr <- (comp2$ac.nohap.hr*100000)/comp2$pop.sum.hr
 comp2$rate.gbd <- (comp2$ac.nohap.gbd*100000)/comp2$pop.sum.gbd
+
+comp2$popw.hr <- comp2$popxconc.hr/comp2$pop.sum.hr
+comp2$popw.gbd <- comp2$popxconc.gbd/comp2$pop.sum.gbd
 
 write.csv(comp2, 'compare.hr.gbd.region.csv')

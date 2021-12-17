@@ -13,11 +13,11 @@ library(safejoin)
 library(tidyverse)
 
 #Specify age group years for rates
-years <- c(2000,2005,2010:2018)
+years <- c(2000,2005,2010:2019)
 
 cats <- c('lri_rr','resp_copd_rr','t2_dm_rr','neo_lung_rr')
 
-conc <- read.csv(paste('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/lookup/combined.hdc.GBD.popw.1km.csv',sep=''))
+conc <- read.csv(paste('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/lookup/combined.hdc.GBD.popw.10km.csv',sep=''))
 print('conc')
 
 hap <- read.csv(paste('/GWSPH/groups/anenberggrp/GBD_2019_June_2020/exposure_summaries/hap_pm2.5_exposure_nat&subnat.csv',sep=''))

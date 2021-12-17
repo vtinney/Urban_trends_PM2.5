@@ -5,8 +5,6 @@ setwd('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/results/city_level/dem/df/')
 df <- read.csv("combined.city.paf.cvd.stroke.dem.csv")
 df3 <- df[,c(4,15,41,55,57)]
 
-#df3 <- dataset[,c(4,14,40,54,56)]
-
 # [1] "X.1"             "X"               "parent_id"       "id"
 # [5] "pop.sum.x"       "popw"            "year"            "location_id"
 # [9] "city"            "cluster"         "loc_name"        "GBDRegion"
@@ -60,17 +58,17 @@ all.comb <- df2 %>%
 all.comb <- as.data.frame(all.comb)
 write.csv(all.comb, 'allcauses.region.comb.dem.csv')
 
-#m <- rbind(all.cvd, all.comb)
+m <- rbind(all.cvd, all.comb)
+ 
+all.nohap <- m %>%
+  group_by(WHORegion,anal) %>%
+  summarize(ac.nohap = sum(ac.nohap, na.rm = T))
+all.nohap <- as.data.frame(all.nohap)
 
-# all.nohap <- m %>% 
-#   group_by(WHORegion,anal) %>%
-#   summarize(ac.nohap = sum(ac.nohap, na.rm = T))
-# all.nohap <- as.data.frame(all.nohap)
-# 
-# all.region <- m %>% 
-#   group_by(WHORegion,anal) %>%
-#   summarize(ac.nohap = sum(ac.nohap, na.rm = T))
-# all.region <- as.data.frame(all.region)
-
-#write.csv(all.region, 'allcauses.region.results.dem.csv')
-# write.csv(all.nohap, 'allcauses.city.results.dem.csv')
+all.region <- m %>%
+  group_by(WHORegion,anal) %>%
+  summarize(ac.nohap = sum(ac.nohap, na.rm = T))
+all.region <- as.data.frame(all.region)
+ 
+write.csv(all.region, 'allcauses.region.results.dem.csv')
+write.csv(all.nohap, 'allcauses.city.results.dem.csv')

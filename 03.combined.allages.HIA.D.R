@@ -13,9 +13,9 @@ library(safejoin)
 library(tidyverse)
 
 #Specify age group years for rates
-years.conc <- c(2018,2000,2000)
-years.bdr <- c(2000,2018,2000)
-years.pop <- c(2000,2000,2018)
+years.conc <- c(2019,2000,2000)
+years.bdr <- c(2000,2019,2000)
+years.pop <- c(2000,2000,2019)
 years <- 1:3
 anal.names <- c('conc','bdr','pop')
 

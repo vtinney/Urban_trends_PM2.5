@@ -20,7 +20,8 @@ ages <- c("25 to 29","30 to 34","35 to 39","40 to 44","45 to 49","50 to 54","55 
           "65 to 69","70 to 74","75 to 79","80 to 84","85 to 89","90 to 94","90 to 94")
 
 #Specify age group years for rates
-years <- c(2000:2018)
+years <- c(2000:2019)
+#years <- c(2019)
 
 conc <- read.csv(paste('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/lookup/combined.hdc.exp.sum.lu.csv',sep=''))
 print('conc')
@@ -33,7 +34,7 @@ hap.prop <- read.csv(paste('/GWSPH/groups/anenberggrp/GBD_2019_June_2020/exposur
 
 ages1 <- read.csv(paste('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/lookup/age.fractions.csv',sep=''))
 
-ages2 <- ages1 %>% gather(year,pop,"pop.2000":"pop.2018")
+ages2 <- ages1 %>% gather(year,pop,"pop.2000":"pop.2019")
 
 ages2$year[ages2$year == 'pop.2000'] <- 2000
 ages2$year[ages2$year == 'pop.2001'] <- 2001
@@ -54,8 +55,9 @@ ages2$year[ages2$year == 'pop.2015'] <- 2015
 ages2$year[ages2$year == 'pop.2016'] <- 2016
 ages2$year[ages2$year == 'pop.2017'] <- 2017
 ages2$year[ages2$year == 'pop.2018'] <- 2018
+ages2$year[ages2$year == 'pop.2019'] <- 2019
 
-ages2 <- ages2[,c(2,3,5,6)]
+ages2 <- ages2[,c(2,3,6,7)]
 
 ihme2 <- rates[,c(3,4,5,9,11,13,14,15)]
 
@@ -140,62 +142,133 @@ for (j in 1:length(cats)){
       
       # Assign exposures based on pm
       for (x in 1:nrow(concs2)){
-        if(concs2[x,4]>0 & concs2[x,4]>mrbrt[,4]){
+        if(concs2[x,4]>0){
           concs2[x,33] <- mrbrt[,1][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
           concs2[x,34] <- mrbrt[,2][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
           concs2[x,35] <- mrbrt[,3][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
+          
+          concs2[x,36] <- mrbrt[,1][concs2[x,31] > mrbrt[,4] & concs2[x,31] < mrbrt[,5]]
+          concs2[x,37] <- mrbrt[,2][concs2[x,31] > mrbrt[,4] & concs2[x,31] < mrbrt[,5]]
+          concs2[x,38] <- mrbrt[,3][concs2[x,31] > mrbrt[,4] & concs2[x,31] < mrbrt[,5]]
+          
         }else{
           concs2[x,33] <- 0
           concs2[x,34] <- 0
           concs2[x,35] <- 0
+          concs2[x,36] <- 0
+          concs2[x,37] <- 0
+          concs2[x,38] <- 0
         }
         
-        if(concs2[x,4] < 10 & concs2[x,4] > 0 & concs2[x,4]>mrbrt[,4]){
-          concs2[x,36] <- mrbrt[,1][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
-          concs2[x,37] <- mrbrt[,1][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
-          concs2[x,38] <- mrbrt[,1][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
+        
+        if(concs2[x,4] < 10 & concs2[x,4] > 0){
+          concs2[x,39] <- mrbrt[,1][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
+          concs2[x,40] <- mrbrt[,2][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
+          concs2[x,41] <- mrbrt[,3][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
+          
+          concs2[x,42] <- mrbrt[,1][concs2[x,31] > mrbrt[,4] & concs2[x,31] < mrbrt[,5]]
+          concs2[x,43] <- mrbrt[,2][concs2[x,31] > mrbrt[,4] & concs2[x,31] < mrbrt[,5]]
+          concs2[x,44] <- mrbrt[,3][concs2[x,31] > mrbrt[,4] & concs2[x,31] < mrbrt[,5]]
+          
         }else{
-          concs2[x,36] <- mrbrt[,1][mrbrt[,4] == 10.00]
-          concs2[x,37] <- mrbrt[,2][mrbrt[,4] == 10.00]
-          concs2[x,38] <- mrbrt[,3][mrbrt[,4] == 10.00]
+          concs2[x,39] <- mrbrt[,1][mrbrt[,4] == 10.00]
+          concs2[x,40] <- mrbrt[,2][mrbrt[,4] == 10.00]
+          concs2[x,41] <- mrbrt[,3][mrbrt[,4] == 10.00]
+          
+          concs2[x,42] <- mrbrt[,1][mrbrt[,4] == 10.00]
+          concs2[x,43] <- mrbrt[,2][mrbrt[,4] == 10.00]
+          concs2[x,44] <- mrbrt[,3][mrbrt[,4] == 10.00]
         }
       } 
       
-      colnames(concs2)[33] <- 'rr.point'
-      colnames(concs2)[34] <- 'rr.upper'
-      colnames(concs2)[35] <- 'rr.lower'
+      colnames(concs2)[33] <- 'rr_oap_point'
+      colnames(concs2)[34] <- 'rr_oap_upper'
+      colnames(concs2)[35] <- 'rr_oap_lower'
       
-      colnames(concs2)[36] <- 'rr.who.point'
-      colnames(concs2)[37] <- 'rr.who.upper'
-      colnames(concs2)[38] <- 'rr.who.lower'
+      colnames(concs2)[36] <- 'rr_hap_point'
+      colnames(concs2)[37] <- 'rr_hap_upper'
+      colnames(concs2)[38] <- 'rr_hap_lower'
       
-      colnames(df8)[1] <- 'parent_id'
+      colnames(concs2)[39] <- 'rr_oap_who_point'
+      colnames(concs2)[40] <- 'rr_oap_who_upper'
+      colnames(concs2)[41] <- 'rr_oap_who_lower'
+      
+      colnames(concs2)[42] <- 'rr_hap_who_point'
+      colnames(concs2)[43] <- 'rr_hap_who_upper'
+      colnames(concs2)[44] <- 'rr_hap_who_lower'
+      
+      colnames(df8)[2] <- 'parent_id'
       df9 <- merge(concs2, df8, by='parent_id',all=TRUE)
-      # RR incorporating HAP
       
       df9 <- df9[complete.cases(df9$popw), ]
       df9 <- df9[complete.cases(df9$sum.pm), ]
       
+      # Point
+      df9$rr_pm_point <- df9$rr_hap_point*df9$mean+df9$rr_oap_point*(1-df9$mean) # mean == hap.prop
+      df9$rr_hap_point <- (df9$rr_hap_point-1) - (df9$rr_oap_point-1) + 1
+      
+      df9$pop_average_pm <- df9$popw+df9$mean*df9$mean.hap              #population average exposure (denominator of proportion for splitting pafs)
+      df9$hap_paf_ratio <- (df9$mean)*(df9$mean.hap)/df9$pop_average_pm #proportion of paf attributable to hap
+      df9$ambient_paf_ratio <- df9$popw/df9$pop_average_pm              #proportion of paf attributable to ambient
+      
+      df9$paf_pm_point <- (df9$rr_pm_point-1)/df9$rr_pm_point           #calculate PM paf based on weighted PM RR
+      df9$paf_hap_point <- df9$paf_pm_point*df9$hap_paf_ratio           #proprotionally split PM paf to Hap and ambient
+      df9$paf_oap_point <- df9$paf_pm_point*df9$ambient_paf_ratio 
+      
+      # Lower
+      df9$rr_pm_lower <- df9$rr_hap_lower*df9$mean+df9$rr_oap_lower*(1-df9$mean) # mean == hap.prop
+      df9$rr_hap_lower <- (df9$rr_hap_lower-1) - (df9$rr_oap_lower-1) + 1
+      
+      df9$paf_pm_lower <- (df9$rr_pm_lower-1)/df9$rr_pm_lower           #calculate PM paf based on weighted PM RR
+      df9$paf_hap_lower <- df9$paf_pm_lower*df9$hap_paf_ratio           #proprotionally split PM paf to Hap and ambient
+      df9$paf_oap_lower <- df9$paf_pm_lower*df9$ambient_paf_ratio 
+      
+      # upper
+      df9$rr_pm_upper <- df9$rr_hap_upper*df9$mean+df9$rr_oap_upper*(1-df9$mean) # mean == hap.prop
+      df9$rr_hap_upper <- (df9$rr_hap_upper-1) - (df9$rr_oap_upper-1) + 1           #proportion of paf attributable to ambient
+      
+      df9$paf_pm_upper <- (df9$rr_pm_upper-1)/df9$rr_pm_upper          #calculate PM paf based on weighted PM RR
+      df9$paf_hap_upper <- df9$paf_pm_upper*df9$hap_paf_ratio           #proprotionally split PM paf to Hap and ambient
+      df9$paf_oap_upper <- df9$paf_pm_upper*df9$ambient_paf_ratio 
+      
+      # Point - WHO
+      df9$rr_pm_who_point <- df9$rr_hap_who_point*df9$mean+df9$rr_oap_who_point*(1-df9$mean) # mean == hap.prop
+      df9$rr_hap_who_point <- (df9$rr_hap_who_point-1) - (df9$rr_oap_who_point-1) + 1
+      
+      df9$pop_average_pm_who <- df9$WHO*df9$mean.hap           #population average exposure (denominator of proportion for splitting pafs)
+      df9$hap_paf_ratio_who <- (df9$WHO)*(df9$mean.hap)/df9$pop_average_pm #proportion of paf attributable to hap
+      df9$ambient_paf_ratio_who <- df9$WHO/df9$pop_average_pm              #proportion of paf attributable to ambient
+      
+      df9$paf_pm_who_point <- (df9$rr_pm_who_point-1)/df9$rr_pm_who_point           #calculate PM paf based on weighted PM RR
+      df9$paf_hap_who_point <- df9$paf_pm_who_point*df9$hap_paf_ratio_who          #proprotionally split PM paf to Hap and ambient
+      df9$paf_oap_who_point <- df9$paf_pm_who_point*df9$ambient_paf_ratio_who 
+      
+      # Lower
+      df9$rr_pm_who_lower <- df9$rr_hap_who_lower*df9$mean+df9$rr_oap_who_lower*(1-df9$mean) # mean == hap.prop
+      df9$rr_hap_who_lower <- (df9$rr_hap_who_lower-1) - (df9$rr_oap_who_lower-1) + 1
+      
+      df9$paf_pm_who_lower <- (df9$rr_pm_who_lower-1)/df9$rr_pm_who_lower          #calculate PM paf based on weighted PM RR
+      df9$paf_hap_who_lower <- df9$paf_pm_who_lower*df9$hap_paf_ratio_who          #proprotionally split PM paf to Hap and ambient
+      df9$paf_oap_who_lower <- df9$paf_pm_who_lower*df9$ambient_paf_ratio_who 
+      
+      # upper
+      df9$rr_pm_who_upper <- df9$rr_hap_who_upper*df9$mean+df9$rr_oap_who_upper*(1-df9$mean) # mean == hap.prop
+      df9$rr_hap_who_upper <- (df9$rr_hap_who_upper-1) - (df9$rr_oap_who_upper-1) + 1
+      
+      df9$paf_pm_who_upper <- (df9$rr_pm_who_upper-1)/df9$rr_pm_who_upper           #calculate PM paf based on weighted PM RR
+      df9$paf_hap_who_upper <- df9$paf_pm_who_upper*df9$hap_paf_ratio_who          #proprotionally split PM paf to Hap and ambient
+      df9$paf_oap_who_upper <- df9$paf_pm_who_upper*df9$ambient_paf_ratio_who 
+      
       df9$pop.frac <- df9$pop/df9$population
-      
-      # RR based on only OAP
-      df9$paf.point <- (df9$rr.point-1)/df9$rr.point
-      df9$paf.upper <- (df9$rr.upper-1)/df9$rr.upper
-      df9$paf.lower <- (df9$rr.lower-1)/df9$rr.lower
-      
-      # RR based only on WHO
-      df9$paf.who.point <- (df9$rr.who.point-1)/df9$rr.who.point
-      df9$paf.who.upper <- (df9$rr.who.upper-1)/df9$rr.who.upper
-      df9$paf.who.lower <- (df9$rr.who.lower-1)/df9$rr.who.lower
-      
+
       # Estimate PAF - both using HAP and not using HAP
-      df9$ac.point <- df9$paf.point*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 
-      df9$ac.upper <- df9$paf.upper*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 
-      df9$ac.lower <- df9$paf.lower*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 
+      df9$ac.point <- df9$paf_oap_point*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 
+      df9$ac.upper <- df9$paf_oap_upper*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 
+      df9$ac.lower <- df9$paf_oap_lower*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 
       
-      df9$ac.who.point <- df9$paf.who.point*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 
-      df9$ac.who.upper <- df9$paf.who.upper*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 
-      df9$ac.who.lower <- df9$paf.who.lower*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 
+      df9$ac.who.point <- df9$paf_oap_who_point*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 
+      df9$ac.who.upper <- df9$paf_oap_who_upper*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 
+      df9$ac.who.lower <- df9$paf_oap_who_lower*(df9$pop.sum*df9$pop.frac)*df9$val*10^-5 
       
       fout_2 <- paste('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/results/city_level/cvd/',causes[j],years[k],age.groups[i],'.csv',sep='')
       print(fout_2)

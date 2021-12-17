@@ -1,12 +1,9 @@
 library(tidyverse)
 
-setwd('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/results/city_level/gbd/df/')
+setwd('D:/GBD_2020/Final/results/gbd/')
+
 
 all <- read.csv('allcauses.city.results.GBD.csv')
-
-colnames(all)[4] <- 'popw'
-colnames(all)[5] <- 'pop.sum'
-# Global mean and SD popw PM
 
 all$product <- all$popw*all$pop.sum
 
@@ -33,7 +30,7 @@ avg.pm.region.spread <- as.data.frame(avg.pm)
 avg.pm.region.spread <- avg.pm.region.spread[,c(1,2,5)]
 avg.pm.region.long <- avg.pm.region.spread %>% spread(year, popw)
 
-avg.pm.region.long$pc <- round((avg.pm.region.long$`2018`-avg.pm.region.long$`2000`)/avg.pm.region.long$`2000`*100,0)
+avg.pm.region.long$pc <- round((avg.pm.region.long$`2019`-avg.pm.region.long$`2000`)/avg.pm.region.long$`2000`*100,0)
 
 write.csv(avg.pm.region.long, 'avg.pm.region.long.gbd.csv')
 
@@ -52,6 +49,6 @@ avg.acrate.region <- avg.acrate.region[,c(1,2,5)]
 avg.acrate.region.spread <- as.data.frame(avg.acrate.region)
 avg.acrate.region.long <- avg.acrate.region.spread %>% spread(year, acrate)
 
-avg.acrate.region.long$pc <- round((avg.acrate.region.long$`2018`-avg.acrate.region.long$`2000`)/avg.acrate.region.long$`2000`*100,0)
+avg.acrate.region.long$pc <- round((avg.acrate.region.long$`2019`-avg.acrate.region.long$`2000`)/avg.acrate.region.long$`2000`*100,0)
 
 write.csv(avg.acrate.region.long, 'avg.acrate.region.long.gbd.csv')

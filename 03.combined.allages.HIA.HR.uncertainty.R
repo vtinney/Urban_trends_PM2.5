@@ -1,5 +1,5 @@
 # ==========================================================================================================================================
-# Created: 2020-12-5
+# Created: 2021-06-13
 # Combined all mortality endpoints (minus age specific CVD & Stroke)
 # This calculates burden at the country level using all concentrations
 # ==========================================================================================================================================
@@ -13,7 +13,8 @@ library(safejoin)
 library(tidyverse)
 
 #Specify age group years for rates
-years <- c(2000:2018)
+years <- c(2000:2019)
+#years <- c(2019)
 
 cats <- c('lri_rr','resp_copd_rr','t2_dm_rr','neo_lung_rr')
 
@@ -121,8 +122,8 @@ causes <- c('Lower respiratory infections','Chronic obstructive pulmonary diseas
       
         if(concs2[x,4] < 10 & concs2[x,4] > 0){
           concs2[x,36] <- mrbrt[,1][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
-          concs2[x,37] <- mrbrt[,1][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
-          concs2[x,38] <- mrbrt[,1][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
+          concs2[x,37] <- mrbrt[,2][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
+          concs2[x,38] <- mrbrt[,3][concs2[x,4] > mrbrt[,4] & concs2[x,4] < mrbrt[,5]]
         }else{
           concs2[x,36] <- mrbrt[,1][mrbrt[,4] == 10.00]
           concs2[x,37] <- mrbrt[,2][mrbrt[,4] == 10.00]

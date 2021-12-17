@@ -24,25 +24,9 @@ gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2016_1km_Aggregated.tif clip
 gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2017_1km_Aggregated.tif clip_ppp_2017.tif
 gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2018_1km_Aggregated.tif clip_ppp_2018.tif
 gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2019_1km_Aggregated.tif clip_ppp_2019.tif
-
+gdalwarp -te -158.1 -54.9 178.6 69.4 -overwrite ppp_2019_1km_Aggregated.tif clip_ppp_2019.tif
 
 # PM Hammer 2020
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200301_200312_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200401_200412_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200501_200512_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200601_200612_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200701_200712_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200801_200812_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_200901_200912_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201001_201012_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201101_201112_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201201_201212_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201301_201312_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201401_201412_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201501_201512_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201601_201612_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201701_201712_0p01.nc
-wget http://fizz.phys.dal.ca/~atmos/datasets/EST2020/ACAG_PM25_GWR_V4GL03_201801_201812_0p01.nc
 
 cd /GWSPH/groups/anenberggrp/hammer_2020/
 # Clip/warp to match cities
@@ -60,24 +44,36 @@ gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=l
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2005.tif clip_pm_2005.tif
 
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2006.tif clip_pm_2006.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2007.tif clip_pm_2007.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2008.tif clip_pm_2008.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2009.tif clip_pm_2009.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2010.tif clip_pm_2010.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2011.tif clip_pm_2011.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2012.tif clip_pm_2012.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2013.tif clip_pm_2013.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2014.tif clip_pm_2014.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2015.tif clip_pm_2015.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2016.tif clip_pm_2016.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2017.tif clip_pm_2017.tif
+
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2018.tif clip_pm_2018.tif
 
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2019.tif clip_pm_2019.tif
 
 # PM GBD at 1km for creating sensitivity ratio
 
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2019.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2019.tif
-
 
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2018.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2018.tif
 
@@ -87,21 +83,107 @@ gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co comp
 
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2015.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2015.tif
 
-
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2014.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2014.tif
-
 
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2013.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2013.tif
 
-
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2012.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2012.tif
 
-
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2011.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2011.tif
-
 
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2010.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2010.tif
 
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2005.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2005.tif
 
 gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -r max -co compress=LZW -co TILED=YES -overwrite /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/mean_raster_2000.tif /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/GBD/pm/rpg2.pm_2000.tif
+
+
+# Download Hammer data
+p42bc5eup9q51lvyv6rmrgyovwh3mu7b.nc #2000
+cv4cpkx7clrg96a18ijd36sj29h1gtqz.nc #2001
+uy96j8rvi6kth0dhgbuhz4e6sl9b8q5o.nc #2002
+bp31qg3su7tt29pjyx444xj4owfujdlc.nc #2003
+wrz11i0139cn4v5afythlp9nnydq5gy6.nc #2004
+mqfjzb24r73tsxm4va2xod37g5kvsmvx.nc #2005
+vlze9xspbm52gb8q02jdgtmnd6zrlyjr.nc #2006
+0o07nkr48zzcl9g9wbrq13nv00waqaz5.nc #2007
+lag87yj0cgqmt3dslirlc0uyloxca7tq.nc #2008
+933kcya7klkz6m6v2y2wngu7b6cpb1bx.nc #2009
+1hb1fz7h7tg1ndf4rqfkzf7d8pzsxg70.nc #2010
+cx6hrd5xuyi4e61ln5e25ss4jpf458d5.nc #2011
+06j26aokkk8qjmosd9jr9kp83l4kmra9.nc #2012
+qs0xo2o7vbd3uwisxaan62lub27dzmsw.nc #2013
+0lg379o6hxgxu7mybyq0okqtl8sg6w5v.nc #2014
+joese00w0xhma2cphbw4py0f85e13t52.nc #2015
+kvjrrb3dvkkrdw2sjyf82lg2d4l4uzu3.nc #2016
+7x38hzx23rv3s2vd5511yvbbvv3x55t8.nc #2017
+0dv3ui71t0gb9vqoy4rb6qjqj2gqzfi9.nc #2018
+ndxz2xn5eu02w93sy2bqsx0ohwt1qvjd.nc #2019
+
+wget https://wustl.box.com/shared/static/p42bc5eup9q51lvyv6rmrgyovwh3mu7b.nc #2000
+wget https://wustl.box.com/shared/static/cv4cpkx7clrg96a18ijd36sj29h1gtqz.nc #2001
+wget https://wustl.box.com/shared/static/uy96j8rvi6kth0dhgbuhz4e6sl9b8q5o.nc #2002
+wget https://wustl.box.com/shared/static/bp31qg3su7tt29pjyx444xj4owfujdlc.nc #2003
+wget https://wustl.box.com/shared/static/wrz11i0139cn4v5afythlp9nnydq5gy6.nc #2004
+wget https://wustl.box.com/shared/static/mqfjzb24r73tsxm4va2xod37g5kvsmvx.nc #2005
+wget https://wustl.box.com/shared/static/vlze9xspbm52gb8q02jdgtmnd6zrlyjr.nc #2006
+wget https://wustl.box.com/shared/static/0o07nkr48zzcl9g9wbrq13nv00waqaz5.nc #2007
+wget https://wustl.box.com/shared/static/lag87yj0cgqmt3dslirlc0uyloxca7tq.nc #2008
+wget https://wustl.box.com/shared/static/933kcya7klkz6m6v2y2wngu7b6cpb1bx.nc #2009
+wget https://wustl.box.com/shared/static/1hb1fz7h7tg1ndf4rqfkzf7d8pzsxg70.nc #2010
+wget https://wustl.box.com/shared/static/cx6hrd5xuyi4e61ln5e25ss4jpf458d5.nc #2011
+wget https://wustl.box.com/shared/static/06j26aokkk8qjmosd9jr9kp83l4kmra9.nc #2012
+wget https://wustl.box.com/shared/static/qs0xo2o7vbd3uwisxaan62lub27dzmsw.nc #2013
+wget https://wustl.box.com/shared/static/0lg379o6hxgxu7mybyq0okqtl8sg6w5v.nc #2014
+wget https://wustl.box.com/shared/static/joese00w0xhma2cphbw4py0f85e13t52.nc #2015
+wget https://wustl.box.com/shared/static/kvjrrb3dvkkrdw2sjyf82lg2d4l4uzu3.nc #2016
+wget https://wustl.box.com/shared/static/7x38hzx23rv3s2vd5511yvbbvv3x55t8.nc #2017
+wget https://wustl.box.com/shared/static/0dv3ui71t0gb9vqoy4rb6qjqj2gqzfi9.nc #2018
+wget https://wustl.box.com/shared/static/ndxz2xn5eu02w93sy2bqsx0ohwt1qvjd.nc #2019
+
+
+cd /GWSPH/groups/anenberggrp/VAS/GBD_2020/final/hammer
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2000.tif clip_pm_2000.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2001.tif clip_pm_2001.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2002.tif clip_pm_2002.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2003.tif clip_pm_2003.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2004.tif clip_pm_2004.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2005.tif clip_pm_2005.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2006.tif clip_pm_2006.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2007.tif clip_pm_2007.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2008.tif clip_pm_2008.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2009.tif clip_pm_2009.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2010.tif clip_pm_2010.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2011.tif clip_pm_2011.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2012.tif clip_pm_2012.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2013.tif clip_pm_2013.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2014.tif clip_pm_2014.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2015.tif clip_pm_2015.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2016.tif clip_pm_2016.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2017.tif clip_pm_2017.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2018.tif clip_pm_2018.tif
+
+gdalwarp -tr 0.008333333 0.008333333 -te -158.1 -54.9 178.6 69.4 -t_srs "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0" -co compress=LZW -co TILED=YES -overwrite h_pm_2019.tif clip_pm_2019.tif
+
+
+
+

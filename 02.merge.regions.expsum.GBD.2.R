@@ -1,16 +1,16 @@
 library(tidyverse)
-setwd('D:/GBD_2020/Final/exp_sum/')
+setwd('/GWSPH/groups/anenberggrp/VAS/GBD_2020/final/lookup/')
 list.files()
 
 lu_hdc <- read.csv('hdc_gbd_lookup.csv')
 lu_hdc <- lu_hdc[,c(1,3,4,5,7,9:15)]
 colnames(lu_hdc)[2] <- 'id'
 
-hdc <- read.csv("combined.hdc.GBD.popw.1km.csv")
-hdc <- hdc[,c(3,5:8)]
-df <- merge(hdc, lu_hdc, by='id')
-
-write.csv(df, 'combined.hdc.GBD.popw.1km.csv')
+# hdc <- read.csv("combined.hdc.GBD.popw.1km.csv")
+# hdc <- hdc[,c(3,5:8)]
+# df <- merge(hdc, lu_hdc, by='id')
+# 
+# write.csv(df, 'combined.hdc.GBD.popw.1km.csv')
 
 #=========================================================================================
 

@@ -12,5 +12,3 @@ df <- merge(hdc, lu_hdc, by='id')
 
 write.csv(df, 'combined.hdc.exp.sum.lu.csv')
 
-df <- subset(df, year %in% 2018)
-sum(df$pop.sum, na.rm=TRUE)

@@ -18,6 +18,28 @@ df$"WHORegion"[df$"WHORegion" == 'EMRO'] <- 'Eastern Mediterranean'
 df$city[df$city == 'São Paulo'] <- 'Sao Paulo'
 df$city[df$city == 'Delhi [New Delhi]'] <- 'New Delhi'
 
+library(tidyverse)
+
+setwd('D:/GBD_2020/Final/results/july_2021/')
+
+all <- read.csv("allcauses.city.results.csv")
+sm <- read.csv("combined.hdc.expsum.sm.csv")
+sm <- sm[,c(3,4,5)]
+
+df <- all
+df <- df[,c(2:23)]
+df$"WHORegion" <- as.character(df$"WHORegion")
+df$"WHORegion"[df$"WHORegion" == 'WPRO'] <- 'Western Pacific'
+df$"WHORegion"[df$"WHORegion" == 'SEARO'] <- 'South-East Asia'
+df$"WHORegion"[df$"WHORegion" == 'EURO'] <- 'Europe'
+df$"WHORegion"[df$"WHORegion" == 'AMRO'] <- 'Americas'
+df$"WHORegion"[df$"WHORegion" == 'AFRO'] <- 'Africa'
+df$"WHORegion"[df$"WHORegion" == 'EMRO'] <- 'Eastern Mediterranean'
+
+df2 <- merge(df, sm, by=c('id','year'))
+write.csv(df2, 'updated_supplemental_july_2021_pm.csv')
+
+
 write.csv(df,'Supplemental_excel.csv')
 #====================================================================
 setwd('D:/GBD_2020/Paper_draft/Supplemental and Figures/')
